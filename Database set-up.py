@@ -16,7 +16,7 @@ def create_database(db_name="DBForFinal.db"):
                 age INTEGER,
                 city TEXT,
                 email TEXT,
-                salary REAL,
+                gpa REAL,
                 is_active INTEGER
             )
         """)
