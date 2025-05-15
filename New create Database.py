@@ -20,10 +20,12 @@ def main():
 
     conn.close()
 
+# Create the create table function
 def add_student_table(cur):
 
     cur.execute("DROP TABLE IF EXISTS Students")
 
+    # Create table
     cur.execute('''CREATE TABLE Students (
     FirstName TEXT PRIMARY KEY NOT NULL,
     LastName TEXT,
@@ -34,8 +36,10 @@ def add_student_table(cur):
     Email TEXT)
     ''')
 
+#Create the add students function
 def add_students(cur):
 
+    # Add data
     students_pop = [('John', 'Doe', '1389403-01', '1/24/1971', 'Economics', 3.73, 'jjdoe@students.ucw.edu'),
                     ('Mary', 'Jane', '1389403-02', '12/6/1969', 'History', 3.82, 'mjjane@students.ucw.edu'),
                     ('Bill', 'Forbes', '1389403-03', '3/3/1970', 'Areal Photography', 2.21, 'bxforbes@students.ucw.edu'),
@@ -47,15 +51,18 @@ def add_students(cur):
                     ('Caleb', 'Dalten', '1389403-09', '6/4/1972', 'Civil Engineering', 3.25, 'cadalten@students.ucw.edu'),
                     ('Israel', 'Achman', '1389403-10', '10/23/1971', 'Math', 3.84, 'iowachman@students.ucw.edu'),]
 
+    # Insert information into the database
     for row in students_pop:
         cur.execute('''INSERT INTO Students (FirstName, LastName, IdNumber, DOB, Major, GPA, Email)
                         VALUES (?, ?, ?, ?, ?, ?, ?)''', (row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
+# Display Data
 def display_students(cur):
     cur.execute("SELECT * FROM Students")
     results = cur.fetchall()
     for row in results:
         print(row)
 
+# Call main function
 if __name__ == '__main__':
     main()
